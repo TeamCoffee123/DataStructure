@@ -22,6 +22,7 @@ public class ArrayListMulti {
     }
 
     public boolean addFirst(int element){
+
         return addMiddle(0,element);
     }
 
@@ -73,7 +74,6 @@ public class ArrayListMulti {
             elementData[i-1] = elementData[i];
         }
         size--;
-        // elementData[size] =null;
         return removed;
     }
 
@@ -86,8 +86,10 @@ public class ArrayListMulti {
     }
 
     public int get(int index){
+
         return elementData[index];
     }
+
     public int size(){
         return size;
     }
