@@ -1,7 +1,7 @@
 package linkedlistQ4_1;
 
 
-public class LinkedRead {
+public class LinkedList {
     private Node head;
     private Node tail;
     private int size = 0;
@@ -24,11 +24,11 @@ public class LinkedRead {
         Node newNode = new Node(inputData);
         newNode.next = head;
         head = newNode;
-
-        if (head == null) {
-            tail = newNode;
-        }
         size++;
+        if (head.next == null) {
+            tail = head;
+        }
+
     }
 
     public void addLast(int inputData) {
@@ -37,101 +37,103 @@ public class LinkedRead {
             addFirst(inputData);
         } else {
             tail.next = newNode;
-            newNode = tail;
+            //newNode = tail;
+            tail = newNode;
             size++;
         }
     }
 
-    Node node(int index) {
+    Node searchNode(int searchIndex) {
         Node x = head;
-        for (int i = 0; i < index; i++)
+        for (int i = 0; i < searchIndex; i++)
             x = x.next;
         return x;
     }
 
 
-    public void addMiddle(int k, int inputData) {
+    public void addMiddle(int index, int inputData) {
 
-        if (size == 0) {
+        if (index == 0) {
             addFirst(inputData);
-        }
-        else{
-            Node temp1 = node(k-1);
+        } else {
+            Node temp1 = searchNode(index - 1);
             Node temp2 = temp1.next;
             Node newNode = new Node(inputData);
 
             temp1.next = newNode;
-            newNode.next=temp2;
+            newNode.next = temp2;
 
             size++;
 
-            if(newNode.next == null){
-                newNode = tail;
+            if (newNode.next == null) {
+                // newNode = tail;
+                tail = newNode;
             }
         }
     }
 
-    public String toString(){
-        if(head == null){
+    public String toString() {
+        if (head == null) {
             return "[]";
         }
         Node temp = head;
-        String str="[";
-        while (temp.next != null){
-            str += temp.next+",";
+        String str = "[";
+        while (temp.next != null) {
+            str += temp.data + ",";
             temp = temp.next;
         }
         str += temp.data;
-        return str+"]";
-
+        return str + "]";
     }
 
-    public int removeFirst(){
+    public int removeFirst() {
         Node temp = head;
         head = temp.next;
         int returnData = temp.data;
         size--;
-        return  returnData;
+        return returnData;
     }
 
-    public int removeMiddle(int index){
-        if(index==0){
-            removeFirst();
-        }
-        Node temp = node(index-1);
-        Node toDoDeleted = temp.next;
+    public int removeMiddle(int index) {
+        if (index == 0)
+            return removeFirst();
+        Node temp = searchNode(index - 1);
+        Node todoDeleted = temp.next;
         temp.next = temp.next.next;
-        int returnData = toDoDeleted.data;
-        if(toDoDeleted == tail){
+        int returnData = todoDeleted.data;
+        if (todoDeleted == tail) {
             tail = temp;
         }
+
         size--;
-        return  returnData;
+        return returnData;
     }
 
-    public int removeLast(){
-        return removeMiddle(size-1);
+    public int removeLast() {
+        return removeMiddle(size - 1);
     }
 
-    public int size(){
+    public int size() {
         return size;
     }
-    public int get(int index){
-        Node temp = node(index);
+
+    public int get(int index) {
+        Node temp = searchNode(index);
         return temp.data;
     }
 
-    public int indexOf(int data){
+    public int indexOf(int data) {
         Node temp = head;
         int index = 0;
-        while(temp.data != data){
-            temp=temp.next;
+        while (temp.data != data) {
+            temp = temp.next;
             index++;
-            if(temp==null)
+            if (temp == null)
                 return -1;
         }
         return index;
     }
+
 
 }
 
