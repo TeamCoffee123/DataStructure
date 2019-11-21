@@ -1,4 +1,4 @@
-package linkedlistQ5_2;
+package doublylinkedlistQ5_2;
 
 public class DoublyLinkedList {
     private Node head;
