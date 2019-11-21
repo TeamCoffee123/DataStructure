@@ -66,8 +66,8 @@ public class LinkedList {
             size++;
 
             if (newNode.next == null) {
-                // newNode = tail;
-                tail = newNode;
+                 newNode = tail;
+                //tail = newNode;
             }
         }
     }
